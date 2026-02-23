@@ -31,3 +31,47 @@ Las empresas de gestión de inmuebles suelen enfrentarse a la desorganización d
    spring.datasource.username=root
    spring.datasource.password=
    spring.jpa.hibernate.ddl-auto=update
+## 🛠️ 4. Documentación de la API (Endpoints según Postman)
+
+### Clientes
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Cliente | `POST` | `/api/clientes` | `{"nombre": "Pablo Arnau", "dni": "12332165X", "email": "pablo@gmail.com"}` |
+| Listar Clientes | `GET` | `/api/clientes` | N/A |
+| Modificar Cliente | `PUT` | `/api/clientes/{id}` | `{"nombre":"PabloArnau","dni":"12332165X","email":"pablo_nuevo_email@gmail.com"}` |
+| Eliminar Cliente | `DELETE` | `/api/clientes/{id}` | N/A |
+
+### Inspectores
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Inspector | `POST` | `/api/inspectores` | `{"nombre": "Julio Perito", "especialidad": "Estructuras", "numeroColegiado": 12}` |
+| Listar Inspectores | `GET` | `/api/inspectores` | N/A |
+| Modificar Inspector | `PUT` | `/api/inspectores/{id}` | `{"nombre": "Julio Perito2", "especialidad": "Estructuras2", "numeroColegiado": 12}` |
+| Eliminar Inspector | `DELETE` | `/api/inspectores/{id}` | N/A |
+
+### Inmuebles
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Inmueble | `POST` | `/api/inmuebles/cliente/{id_cliente}` | `{"direccion": "Av. Principal 10", "ciudad": "Madrid"}` |
+
+### Desperfectos
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Desperfecto | `POST` | `/api/desperfectos/inmueble/{id_inmueble}` | `{"descripcion": "Grieta fachada", "gravedad": "Alta"}` |
+| Modificar Desperfecto | `PUT` | `/api/desperfectos/{id}` | `{"descripcion": "Grieta fachada desminuye", "gravedad": "baja", "inmueble": { "id": 2}}` |
+| Listar Desperfectos | `GET` | `/api/desperfectos` | N/A |
+
+### Inspecciones
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Inspección | `POST` | `/api/inspecciones` | `{"fecha": "2026-03-15T11:30:00", "estado": "PENDIENTE", "inmueble": {"id": 4}}` |
+| Asignar Inspector | `PUT` | `/api/inspecciones/{id_inspeccion}/asignar-inspector/{id_inspector}` | N/A |
+
+### Reportes
+| Petición | Método | Endpoint | Body (JSON) |
+| :--- | :--- | :--- | :--- |
+| Crear Reporte | `POST` | `/api/reportes` | `{"observacionesGenerales": "La inspección revela daños...", "fechaCreacion": "2026-02-22", "inspeccion": {"id": 2}}` |
+| Modificar Reporte | `PUT` | `/api/reportes/{id}` | `{"observacionesGenerales": "ACTUALIZACIÓN...", "fechaCreacion": "2026-02-22", "inspeccion": {"id": 2}}` |
+| Eliminar Reporte | `DELETE` | `/api/reportes/{id}` | N/A |
+| Asignar Desperfecto | `PUT` | `/api/reportes/{id_reporte}/desperfecto/{id_desper}` | N/A |
+| Ver Reporte Detallado | `GET` | `/api/reportes/{id}` | N/A |
